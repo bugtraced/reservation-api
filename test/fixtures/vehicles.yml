@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  make: Toyota
+  model: Camry
+  year: 2020
+  color: Blue
+  license_plate: ABC123
+  customer: one
+
+two:
+  make: Honda
+  model: Civic
+  year: 2021
+  color: Red
+  license_plate: XYZ789
+  customer: two

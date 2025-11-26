@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  customer: one
+  vehicle: one
+  start_time: <%= 1.day.from_now %>
+  end_time: <%= 1.day.from_now + 2.hours %>
+  status: pending
+
+two:
+  customer: two
+  vehicle: two
+  start_time: <%= 2.days.from_now %>
+  end_time: <%= 2.days.from_now + 2.hours %>
+  status: confirmed

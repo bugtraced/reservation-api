@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: John Doe
+  email: john@example.com
+  phone: "123-456-7890"
+
+two:
+  name: Jane Smith
+  email: jane@example.com
+  phone: "987-654-3210"
