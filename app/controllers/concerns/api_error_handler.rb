@@ -33,4 +33,3 @@ module ApiErrorHandler
     render json: { error: "Unable to delete record: #{exception.record.errors.full_messages.join(', ')}" }, status: :unprocessable_entity
   end
 end
-

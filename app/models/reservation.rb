@@ -4,12 +4,12 @@ class Reservation < ApplicationRecord
 
   validates :start_time, presence: true
   validates :end_time, presence: true
-  validates :status, presence: true, inclusion: { in: %w[pending confirmed cancelled completed] }
+  validates :status, presence: true, inclusion: { in: %w[ pending confirmed cancelled completed ] }
   validate :end_time_after_start_time
   validate :no_overlapping_reservations
   validate :start_time_in_future
 
-  scope :upcoming, -> { where("start_time > ?", Time.current).where(status: %w[pending confirmed]) }
+  scope :upcoming, -> { where("start_time > ?", Time.current).where(status: %w[ pending confirmed ]) }
   scope :by_date_range, ->(start_date, end_date) { where("start_time >= ? AND end_time <= ?", start_date, end_date) }
 
   private
@@ -25,7 +25,7 @@ class Reservation < ApplicationRecord
 
     overlapping = Reservation.where(vehicle_id: vehicle_id)
                             .where.not(id: id)
-                            .where(status: %w[pending confirmed])
+                            .where(status: %w[ pending confirmed ])
                             .where("(start_time < ? AND end_time > ?) OR (start_time < ? AND end_time > ?)",
                                    end_time, start_time, start_time, end_time)
 
@@ -34,7 +34,7 @@ class Reservation < ApplicationRecord
 
   def start_time_in_future
     return unless start_time.present?
-    return if %w[completed cancelled].include?(status)
+    return if %w[ completed cancelled ].include?(status)
 
     errors.add(:start_time, "must be in the future") if start_time < Time.current
   end

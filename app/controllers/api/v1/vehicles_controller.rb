@@ -4,15 +4,18 @@ class Api::V1::VehiclesController < ApplicationController
   def index
     vehicles = Vehicle.includes(:customer, :reservations).all
     vehicles = vehicles.where(customer_id: params[:customer_id]) if params[:customer_id].present?
-    render json: vehicles, include: [:customer, :reservations]
+    render json: vehicles, include: [ :customer, :reservations ]
   end
 
   def show
-    render json: @vehicle, include: [:customer, :reservations]
+    render json: @vehicle, include: [ :customer, :reservations ]
   end
 
   def create
-    return render_error("Customer not found", :not_found) unless customer_exists?
+    unless customer_exists?
+      render_error("Customer not found", :not_found)
+      return
+    end
 
     vehicle = Vehicle.new(vehicle_params)
     if vehicle.save
@@ -42,7 +45,7 @@ class Api::V1::VehiclesController < ApplicationController
 
   def set_vehicle
     @vehicle = Vehicle.find_by(id: params[:id])
-    return render_not_found("Vehicle") unless @vehicle
+    render_not_found("Vehicle") unless @vehicle
   end
 
   def vehicle_params

@@ -3,11 +3,11 @@ class Api::V1::CustomersController < ApplicationController
 
   def index
     customers = Customer.includes(:vehicles, :reservations).all
-    render json: customers, include: [:vehicles, :reservations]
+    render json: customers, include: [ :vehicles, :reservations ]
   end
 
   def show
-    render json: @customer, include: [:vehicles, :reservations]
+    render json: @customer, include: [ :vehicles, :reservations ]
   end
 
   def create
@@ -39,7 +39,7 @@ class Api::V1::CustomersController < ApplicationController
 
   def set_customer
     @customer = Customer.find_by(id: params[:id])
-    return render_not_found("Customer") unless @customer
+    render_not_found("Customer") unless @customer
   end
 
   def customer_params

@@ -6,16 +6,22 @@ class Api::V1::ReservationsController < ApplicationController
     reservations = reservations.where(customer_id: params[:customer_id]) if params[:customer_id].present?
     reservations = reservations.where(vehicle_id: params[:vehicle_id]) if params[:vehicle_id].present?
     reservations = reservations.upcoming if params[:upcoming] == "true"
-    render json: reservations, include: [:customer, :vehicle]
+    render json: reservations, include: [ :customer, :vehicle ]
   end
 
   def show
-    render json: @reservation, include: [:customer, :vehicle]
+    render json: @reservation, include: [ :customer, :vehicle ]
   end
 
   def create
-    return render_error("Customer not found", :not_found) unless customer_exists?
-    return render_error("Vehicle not found", :not_found) unless vehicle_exists?
+    unless customer_exists?
+      render_error("Customer not found", :not_found)
+      return
+    end
+    unless vehicle_exists?
+      render_error("Vehicle not found", :not_found)
+      return
+    end
 
     reservation = Reservation.new(reservation_params)
     if reservation.save
@@ -45,7 +51,7 @@ class Api::V1::ReservationsController < ApplicationController
 
   def set_reservation
     @reservation = Reservation.find_by(id: params[:id])
-    return render_not_found("Reservation") unless @reservation
+    render_not_found("Reservation") unless @reservation
   end
 
   def reservation_params
