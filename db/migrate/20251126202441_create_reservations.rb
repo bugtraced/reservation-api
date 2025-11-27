@@ -10,7 +10,7 @@ class CreateReservations < ActiveRecord::Migration[8.1]
       t.timestamps
     end
 
-    add_index :reservations, [:vehicle_id, :start_time, :end_time]
+    add_index :reservations, [ :vehicle_id, :start_time, :end_time ]
     add_index :reservations, :status
   end
 end

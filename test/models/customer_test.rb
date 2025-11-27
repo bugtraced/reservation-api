@@ -53,7 +53,7 @@ class CustomerTest < ActiveSupport::TestCase
   end
 
   test "should accept valid phone formats" do
-    valid_phones = ["123-456-7890", "(123) 456-7890", "1234567890", "123 456 7890"]
+    valid_phones = [ "123-456-7890", "(123) 456-7890", "1234567890", "123 456 7890" ]
     valid_phones.each do |phone|
       @customer.phone = phone
       assert @customer.valid?, "#{phone} should be valid"

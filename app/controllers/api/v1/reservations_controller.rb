@@ -1,5 +1,5 @@
 class Api::V1::ReservationsController < ApplicationController
-  before_action :set_reservation, only: [:show, :update, :destroy]
+  before_action :set_reservation, only: [ :show, :update, :destroy ]
 
   def index
     reservations = Reservation.includes(:customer, :vehicle).all
